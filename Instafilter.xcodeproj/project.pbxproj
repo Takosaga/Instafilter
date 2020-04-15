@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A528169224468A7B00AE9318 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A528169124468A7B00AE9318 /* ImagePicker.swift */; };
 		A5294A5E2442849600781742 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5294A5D2442849600781742 /* AppDelegate.swift */; };
 		A5294A602442849600781742 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5294A5F2442849600781742 /* SceneDelegate.swift */; };
 		A5294A622442849600781742 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5294A612442849600781742 /* ContentView.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A528169124468A7B00AE9318 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		A5294A5A2442849600781742 /* Instafilter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instafilter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5294A5D2442849600781742 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5294A5F2442849600781742 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				A5294A5D2442849600781742 /* AppDelegate.swift */,
 				A5294A5F2442849600781742 /* SceneDelegate.swift */,
 				A5294A612442849600781742 /* ContentView.swift */,
+				A528169124468A7B00AE9318 /* ImagePicker.swift */,
 				A5294A632442849800781742 /* Assets.xcassets */,
 				A5294A682442849800781742 /* LaunchScreen.storyboard */,
 				A5294A6B2442849800781742 /* Info.plist */,
@@ -147,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5294A5E2442849600781742 /* AppDelegate.swift in Sources */,
+				A528169224468A7B00AE9318 /* ImagePicker.swift in Sources */,
 				A5294A602442849600781742 /* SceneDelegate.swift in Sources */,
 				A5294A622442849600781742 /* ContentView.swift in Sources */,
 			);
