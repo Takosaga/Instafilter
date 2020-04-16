@@ -18,20 +18,22 @@ struct ContentView: View {
     @State private var showingImagePicker = false
     @State private var inputImage: UIImage?
     @State private var processedImage: UIImage?
+    @State private var showingAlert = false
+    @State private var filterName = "Sepia Tone"
     
     @State var currentFilter: CIFilter = CIFilter.sepiaTone()
     let context = CIContext()
     
-
+    
     var body: some View {
         let intensity = Binding<Double>(
             get: {
                 self.filterIntensity
-            },
+        },
             set: {
                 self.filterIntensity = $0
                 self.applyProcessing()
-            }
+        }
         )
         
         return NavigationView {
@@ -55,6 +57,11 @@ struct ContentView: View {
                 }
                 
                 HStack {
+                    Text("Current Filter: \(self.filterName)")
+                        .font(.headline)
+                }
+                
+                HStack {
                     Text("Intensity")
                     Slider(value: intensity)
                 }
@@ -68,7 +75,10 @@ struct ContentView: View {
                     Spacer()
                     
                     Button("Save") {
-                        guard let processedImage = self.processedImage else { return }
+                        guard let processedImage = self.processedImage else {
+                            self.showingAlert = true
+                            return }
+                        
                         
                         let imageSaver = ImageSaver()
                         
@@ -82,24 +92,37 @@ struct ContentView: View {
                         
                         imageSaver.writeToPhotoAlbum(image: processedImage)
                     }
+                    .alert(isPresented: $showingAlert) {
+                        Alert(title: Text("No Image Selected"), message: Text("Please select an image."), dismissButton: .default(Text("Dismiss")))
+                    }
                 }
             }
             .padding([.horizontal, .bottom])
             .navigationBarTitle("Instafilter")
             .sheet(isPresented: $showingImagePicker,
-                    onDismiss: loadImage) {
+                   onDismiss: loadImage) {
                     ImagePicker(image: self.$inputImage)
             }
             .actionSheet(isPresented: $showingFilterSheet) {
                 ActionSheet(title: Text("Select a filter"), buttons: [
-                    .default(Text("Crystalize")) {
-                        self.setFilter(CIFilter.crystallize())} ,
-                    .default(Text("Edges")) { self.setFilter(CIFilter.edges())},
-                    .default(Text("Gaussian Blur")) { self.setFilter(CIFilter.gaussianBlur())},
-                    .default(Text("Pixallate")) { self.setFilter(CIFilter.pixellate())},
-                    .default(Text("Sepia Tone")) { self.setFilter(CIFilter.sepiaTone())},
-                    .default(Text("Unshard Mask")) { self.setFilter(CIFilter.unsharpMask())},
-                    .default(Text("Vignette")) { self.setFilter(CIFilter.vignette())},
+                    .default(Text("Edges")) {
+                        self.filterName = "Edges"
+                        self.setFilter(CIFilter.edges())},
+                    .default(Text("Gaussian Blur")) {
+                        self.filterName = "Gaussian Blur"
+                        self.setFilter(CIFilter.gaussianBlur())},
+                    .default(Text("Pixallate")) {
+                        self.filterName = "Pixallate"
+                        self.setFilter(CIFilter.pixellate())},
+                    .default(Text("Sepia Tone")) {
+                        self.filterName = "Sepia Tone"
+                        self.setFilter(CIFilter.sepiaTone())},
+                    .default(Text("Unshard Mask")) {
+                        self.filterName = "Unshared Mask"
+                        self.setFilter(CIFilter.unsharpMask())},
+                    .default(Text("Vignette")) {
+                        self.filterName = "Vignette"
+                        self.setFilter(CIFilter.vignette())},
                     .cancel()
                 ])
             }
